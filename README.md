@@ -39,13 +39,13 @@ O foco do code challenge é conhecer melhor sua **criatividade, organização, c
 
 ### WEB:
 
-Para começar, basta *fazer um `FORK`* desse repositório para a sua conta, programar nesse fork tudo que precisa, depois **ABRIR UM PULL REQUEST DO SEU FORK PARA ESSE REPOSITÓRIO AQUI**.
+Para começar, basta *clonar* esse repositório para a sua conta, se preferir que seja privado, me dar acesso ao repo (@hladf), programar tudo que precisa, depois nos enviar a url do seu repo.
 O sistema só precisa adicionar e deletar itens da lista de Todo, ter uma interface amigável, sem ser feia e sem renderizações desnecessárias de componentes/funções (pra isso os hooks), mas se quiser implementar algo mais para poder mostrar melhor como é seu código, fique á vontade.
 
 ### API:
 
 Você pode usar a do `json-server` que já está configurada, basta rodar o comando `yarn api:server` que abrirá um servidor no endereço que está configurado no `.env`.
-Já vem com as rotas `/example` e `/todos`.  
+Já vem com as rotas `/example` e `/todos`.
 
 [**Mais informações sobre `json server`** 🌐](https://github.com/typicode/json-server#json-server--)
 
