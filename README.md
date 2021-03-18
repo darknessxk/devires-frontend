@@ -39,7 +39,7 @@ O foco do code challenge é conhecer melhor sua **criatividade, organização, c
 
 ### WEB:
 
-Para começar, basta *clonar* esse repositório para a sua conta, se preferir que seja privado, me dar acesso ao repo (@hladf), programar tudo que precisa, depois nos enviar a url do seu repo.
+Para começar, basta **clonar** esse repositório para a sua conta, se preferir que seja privado, me dar acesso ao repo (@hladf), programar tudo que precisa, depois nos enviar a url do seu repo.
 O sistema só precisa adicionar e deletar itens da lista de Todo, ter uma interface amigável, sem ser feia e sem renderizações desnecessárias de componentes/funções (pra isso os hooks), mas se quiser implementar algo mais para poder mostrar melhor como é seu código, fique á vontade.
 
 ### API:
