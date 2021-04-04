@@ -14,7 +14,7 @@ const todoSlice = createSlice({
   reducers: {
     addTodo: (state, { payload }: PayloadAction<TodoItem>) => ({
       ...state,
-      data: payload,
+      items: [...state.items, payload],
     }),
   },
 });
@@ -24,15 +24,13 @@ export const { addTodo } = todoSlice.actions;
 export default todoSlice.reducer;
 
 export const addItem = (item: TodoItem) => async (dispatch: Dispatch) => {
-  const {
-    status, data
-  } = await addToList(item);
+  const { status, data } = await addToList(item);
 
   if (status <= 200 && status >= 399) {
-    return; // do some checkings
+    return;
   }
 
-  dispatch(addTodo({ data }));
+  dispatch(addTodo(data));
 };
 
 export const selectExampleState = (state: RootState) => state.todoReducer;
