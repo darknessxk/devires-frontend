@@ -1,3 +1,3 @@
 export * from './TodoItem';
 export * from './TodoState';
-export * from './ListItemProps';
+export * from './TodoItemProps';
