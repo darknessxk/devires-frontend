@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { AppBody, Container, Header, List, ListItem } from '../components';
+import { AddItem, AppBody, Container, Header, List, TodoItem } from '../components';
 import '../styles/main.css';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getTodoList } from '../store/ducks/todo.duck';
@@ -16,11 +16,14 @@ function App() {
     <AppBody className="App">
       <Container>
         <Header>My Things</Header>
-        <List>
-          {todos.map((todo) => (
-            <ListItem item={todo} key={todo.id} />
-          ))}
-        </List>
+        {todos.length > 0 ? (
+          <List>
+            {todos.map((todo) => (
+              <TodoItem item={todo} key={todo.id} />
+            ))}
+          </List>
+        ) : null}
+        <AddItem />
       </Container>
     </AppBody>
   );
