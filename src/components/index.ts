@@ -6,3 +6,8 @@ export * from './Header';
 export * from './List';
 export * from './ListItem';
 export * from './TodoItem';
+export * from './AddItem';
+export * from './Button';
+export * from './RoundedButton';
+export * from './FlexContainer';
+export * from './Input';
