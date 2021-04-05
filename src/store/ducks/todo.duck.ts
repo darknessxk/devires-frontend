@@ -1,12 +1,25 @@
-import { createSlice, PayloadAction, Dispatch } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createSlice,
+  Dispatch,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import { RootState } from 'store';
-import { TodoState } from '../../types/TodoState';
-import { TodoItem } from '../../types';
-import { addToList } from '../../services/todo';
+import { TodoItem, TodoState } from '../../types';
+import { addToList, getList } from '../../services/todo';
 
 const INITIAL_STATE: TodoState = {
   items: [],
 };
+
+export const getTodoList = createAsyncThunk('todo/getList', async () => {
+  const response = await getList();
+  if (response.status <= 199 && response.status >= 400) {
+    return [];
+  } else {
+    return response.data;
+  }
+});
 
 const todoSlice = createSlice({
   name: 'todo',
@@ -16,10 +29,19 @@ const todoSlice = createSlice({
       ...state,
       items: [...state.items, payload],
     }),
+    addTodoArray: (state, { payload }: PayloadAction<Array<TodoItem>>) => ({
+      ...state,
+      items: [...state.items, ...payload],
+    }),
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getTodoList.fulfilled, (state, { payload }) => {
+      state.items.push(...payload);
+    });
   },
 });
 
-export const { addTodo } = todoSlice.actions;
+export const { addTodo, addTodoArray } = todoSlice.actions;
 
 export default todoSlice.reducer;
 
@@ -33,4 +55,4 @@ export const addItem = (item: TodoItem) => async (dispatch: Dispatch) => {
   dispatch(addTodo(data));
 };
 
-export const selectExampleState = (state: RootState) => state.todoReducer;
+export const selectTodoState = (state: RootState) => state.todoReducer;
