@@ -1,3 +1,3 @@
 import tw from 'twin.macro';
 
-export const Container = tw.div`my-52 w-72`;
+export const Container = tw.div`w-72 py-2`;
