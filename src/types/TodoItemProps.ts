@@ -1,5 +1,5 @@
 import { TodoItem } from './';
 
-export type ListItemProps = {
+export type TodoItemProps = {
   item: TodoItem;
 };
