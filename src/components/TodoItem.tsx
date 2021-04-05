@@ -1,12 +1,10 @@
 import React, { FC, useCallback } from 'react';
-import tw from 'twin.macro';
-import { ListItem } from './';
+import { ListItem, RoundedButton, TodoTitle } from './';
 import { TodoItemProps } from '../types';
 import { useAppDispatch } from '../store/hooks';
 import { deleteTodoItem } from '../store/ducks/todo.duck';
-
-const StyledDescription = tw.span`px-1`;
-const StyledName = tw.span`px-1`;
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export const TodoItem: FC<TodoItemProps> = ({ item }) => {
   const dispatch = useAppDispatch();
@@ -17,11 +15,14 @@ export const TodoItem: FC<TodoItemProps> = ({ item }) => {
     }
   }, [item, dispatch]);
 
+  const deleteButtonClick = () => () => deleteAction();
+
   return (
     <ListItem>
-      <StyledName>{item.title}</StyledName>
-      <StyledDescription>{item.description}</StyledDescription>
-      <span onClick={() => deleteAction()}>Delete ME</span>
+      <TodoTitle>{item.title}</TodoTitle>
+      <RoundedButton onClick={deleteButtonClick()}>
+        <FontAwesomeIcon icon={faTrash} />
+      </RoundedButton>
     </ListItem>
   );
 };
