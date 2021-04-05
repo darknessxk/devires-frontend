@@ -5,3 +5,4 @@ export * from './AppBody';
 export * from './Header';
 export * from './List';
 export * from './ListItem';
+export * from './TodoItem';
