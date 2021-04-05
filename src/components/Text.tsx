@@ -1,10 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import tw from 'twin.macro';
 
-const TextStyled = styled.p`
-  ${tw``};
-`;
+const TextStyled = tw.p`text-gray-700 font-thin`;
 
 export const Text: React.FC = ({ children }) => {
   return <TextStyled>{children}</TextStyled>;
