@@ -5,6 +5,9 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch } from '../store/hooks';
 import { addTodoItem } from '../store/ducks/todo.duck';
 import { TodoItem } from '../types';
+import tw from 'twin.macro';
+
+const AddItemStyled = tw.section`mb-4`;
 
 export const AddItem = () => {
   const dispatch = useAppDispatch();
@@ -22,20 +25,23 @@ export const AddItem = () => {
         description,
         done: false,
       });
+      setTitle('');
     };
   };
 
   return (
-    <FlexContainer>
-      <RoundedButton onClick={btnClick()}>
-        <FontAwesomeIcon icon={faPlus} />
-      </RoundedButton>
-      <Input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Feed mittens the kitty"
-        autoComplete="off"
-      />
-    </FlexContainer>
+    <AddItemStyled>
+      <FlexContainer>
+        <Input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Feed mittens the kitty"
+          autoComplete="off"
+        />
+        <RoundedButton onClick={btnClick()}>
+          <FontAwesomeIcon icon={faPlus} />
+        </RoundedButton>
+      </FlexContainer>
+    </AddItemStyled>
   );
 };
