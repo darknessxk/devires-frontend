@@ -1,3 +1,3 @@
 import tw from 'twin.macro';
 
-export const RoundedButton = tw.button`w-10 h-10 border-2 border-indigo-500 bg-indigo-300 text-gray-600 p-0 m-0 rounded-full`;
+export const RoundedButton = tw.button`w-10 h-10 border-0 bg-indigo-600 text-gray-200 p-0 m-0 rounded-full mr-4 cursor-pointer`;
