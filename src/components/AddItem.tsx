@@ -20,6 +20,8 @@ export const AddItem = () => {
 
   const btnClick = () => {
     return () => {
+      if (title.length <= 0) return;
+
       addItem({
         title,
         description,
