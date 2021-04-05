@@ -36,7 +36,7 @@ const todoSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getTodoList.fulfilled, (state, { payload }) => {
-      state.items.push(...payload);
+      state.items = payload;
     });
   },
 });
