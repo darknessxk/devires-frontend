@@ -1,58 +1,68 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  Dispatch,
-  PayloadAction,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from 'store';
 import { TodoItem, TodoState } from '../../types';
-import { addToList, getList } from '../../services/todo';
+import { addToList, deleteItem, getList } from '../../services/todo';
 
 const INITIAL_STATE: TodoState = {
   items: [],
 };
 
 export const getTodoList = createAsyncThunk('todo/getList', async () => {
-  const response = await getList();
-  if (response.status <= 199 && response.status >= 400) {
+  const { status, data } = await getList();
+  if (status <= 199 && status >= 400) {
     return [];
   } else {
-    return response.data;
+    return data;
   }
 });
+
+export const addTodoItem = createAsyncThunk(
+  'todo/addItem',
+  async (item: TodoItem) => {
+    const { status, data } = await addToList(item);
+
+    if (status <= 200 && status >= 399) {
+      return;
+    }
+
+    return data;
+  }
+);
+
+export const deleteTodoItem = createAsyncThunk(
+  'todo/deleteItem',
+  async (id: number) => {
+    const { status } = await deleteItem(id);
+
+    if (status <= 200 && status >= 399) {
+      return -1;
+    }
+
+    return id;
+  }
+);
 
 const todoSlice = createSlice({
   name: 'todo',
   initialState: INITIAL_STATE,
-  reducers: {
-    addTodo: (state, { payload }: PayloadAction<TodoItem>) => ({
-      ...state,
-      items: [...state.items, payload],
-    }),
-    addTodoArray: (state, { payload }: PayloadAction<Array<TodoItem>>) => ({
-      ...state,
-      items: [...state.items, ...payload],
-    }),
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getTodoList.fulfilled, (state, { payload }) => {
       state.items = payload;
     });
+    builder.addCase(addTodoItem.fulfilled, (state, { payload }) => {
+      if (payload) {
+        state.items.push(payload);
+      }
+    });
+    builder.addCase(deleteTodoItem.fulfilled, (state, { payload }) => {
+      if (payload) {
+        state.items = state.items.filter((item) => item.id !== payload);
+      }
+    });
   },
 });
 
-export const { addTodo, addTodoArray } = todoSlice.actions;
-
 export default todoSlice.reducer;
-
-export const addItem = (item: TodoItem) => async (dispatch: Dispatch) => {
-  const { status, data } = await addToList(item);
-
-  if (status <= 200 && status >= 399) {
-    return;
-  }
-
-  dispatch(addTodo(data));
-};
 
 export const selectTodoState = (state: RootState) => state.todoReducer;
